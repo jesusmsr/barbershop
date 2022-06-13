@@ -17,7 +17,12 @@ export class LoginPageComponent implements OnInit {
 
   loginForm = this.formBuilder.group({
     email: '',
-    password: ''
+    username: '',
+    phoneNumber: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    confirmPassword: '',
   });
 
   ngOnInit(): void {
@@ -26,13 +31,13 @@ export class LoginPageComponent implements OnInit {
   onSubmit() {
     console.log('1');
     const data = {
-      'username': 'angular',
-      'email': 'angular@example.com',
-      'password': 'Angular1*',
-      'password_confirm': 'Angular1*',
-      'phone_number': '6326546',
-      'first_name': 'Angular',
-      'last_name': 'Angularlastname'
+      'username': this.loginForm.value.username,
+      'email': this.loginForm.value.email,
+      'password': this.loginForm.value.password,
+      'password_confirm': this.loginForm.value.confirmPassword,
+      'phone_number': this.loginForm.value.phoneNumber,
+      'first_name': this.loginForm.value.firstName,
+      'last_name': this.loginForm.value.lastName
     }
     this.http.post('http://127.0.0.1:8000/account/register/', data).subscribe(response => {
       console.log(response);

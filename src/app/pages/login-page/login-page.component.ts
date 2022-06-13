@@ -36,19 +36,13 @@ export class LoginPageComponent implements OnInit {
 
       user.username = this.loginForm.value.username
       user.email = this.loginForm.value.email
+      user.phoneNumber = this.loginForm.value.phoneNumber
       user.firstName = this.loginForm.value.firstName
       user.lastName = this.loginForm.value.lastName
-    }
-    const data = {
-      'username': this.loginForm.value.username,
-      'email': this.loginForm.value.email,
-      'password': this.loginForm.value.password,
-      'password_confirm': this.loginForm.value.confirmPassword,
-      'phone_number': this.loginForm.value.phoneNumber,
-      'first_name': this.loginForm.value.firstName,
-      'last_name': this.loginForm.value.lastName
-    }
+      user.password = this.loginForm.value.password
 
+      this.userService.registerUser(user, this.loginForm.value.confirmPassword);
+    }
   }
 
 }

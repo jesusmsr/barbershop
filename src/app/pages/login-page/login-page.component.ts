@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -12,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private userService: UserService
   ) { }
 
   loginForm = this.formBuilder.group({
@@ -29,7 +31,14 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('1');
+    if (this.loginForm.value.password == this.loginForm.value.confirmPassword) {
+      const user = new User()
+
+      user.username = this.loginForm.value.username
+      user.email = this.loginForm.value.email
+      user.firstName = this.loginForm.value.firstName
+      user.lastName = this.loginForm.value.lastName
+    }
     const data = {
       'username': this.loginForm.value.username,
       'email': this.loginForm.value.email,
@@ -39,9 +48,7 @@ export class LoginPageComponent implements OnInit {
       'first_name': this.loginForm.value.firstName,
       'last_name': this.loginForm.value.lastName
     }
-    this.http.post('http://127.0.0.1:8000/account/register/', data).subscribe(response => {
-      console.log(response);
-    })
+
   }
 
 }

@@ -10,11 +10,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { MatButtonModule } from '@angular/material/button';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +29,9 @@ import { MatInputModule } from '@angular/material/input';
     HttpClientModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

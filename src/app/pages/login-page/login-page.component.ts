@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -14,35 +16,28 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
+
   ) { }
 
   loginForm = this.formBuilder.group({
-    email: '',
-    username: '',
-    phoneNumber: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    confirmPassword: '',
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    if (this.loginForm.value.password == this.loginForm.value.confirmPassword) {
-      const user = new User()
-
-      user.username = this.loginForm.value.username
-      user.email = this.loginForm.value.email
-      user.phoneNumber = this.loginForm.value.phoneNumber
-      user.firstName = this.loginForm.value.firstName
-      user.lastName = this.loginForm.value.lastName
-      user.password = this.loginForm.value.password
-
-      this.userService.registerUser(user, this.loginForm.value.confirmPassword);
-    }
+    this.userService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response: any) => {
+      if (response.response === '200') {
+        console.log(response);
+        localStorage.setItem('accessToken', response.token.access);
+        localStorage.setItem('refreshToken', response.token.refresh);
+        this.router.navigate(['']);
+      }
+    })
   }
 
 }

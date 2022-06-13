@@ -1,0 +1,14 @@
+.container {
+    max-width: 20vw;
+    margin: auto;
+    margin-top: 15vh;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.container form input {
+    width: 15vw;
+}

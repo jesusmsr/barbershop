@@ -14,6 +14,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { MatButtonModule } from '@angular/material/button';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatButtonModule,
     MatSidenavModule
   ],
-  providers: [],
+  providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

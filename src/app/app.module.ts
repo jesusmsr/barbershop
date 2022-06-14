@@ -16,6 +16,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     LoginPageComponent,
     RegisterPageComponent,
     HomePageComponent,
-    ProfileComponent
+    ProfileComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

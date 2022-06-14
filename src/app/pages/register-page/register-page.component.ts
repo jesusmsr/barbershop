@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private authService: AuthService
   ) { }
 
   loginForm = this.formBuilder.group({
@@ -39,7 +40,7 @@ export class RegisterPageComponent implements OnInit {
       user.lastName = this.loginForm.value.lastName
       user.password = this.loginForm.value.password
 
-      this.userService.registerUser(user, this.loginForm.value.confirmPassword);
+      this.authService.register(user, this.loginForm.value.confirmPassword);
     }
   }
 

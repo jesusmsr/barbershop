@@ -7,7 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
 const routes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'home', component: HomePageComponent, canActivate: [AuthGuard] },

@@ -1,0 +1,13 @@
+mat-drawer {
+    width: 10vw;
+}
+
+mat-drawer-container {
+    height: 100%;
+}
+
+.drawer-container {
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+}

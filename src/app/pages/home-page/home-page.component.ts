@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -7,16 +8,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-
+  opened = true
   constructor(
-    private userService: UserService
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
   logout() {
-    this.userService.logout();
+    this.authService.logout();
   }
 
 }

@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side"
+        [opened]="isLogged | async">
+        <div class="drawer-container">
+            <button type="submit"
+                mat-raised-button
+                (click)="logout()">Logout</button>
+            <button type="submit"
+                mat-raised-button
+                [routerLink]="['/profile']">Profile</button>
+        </div>
+
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

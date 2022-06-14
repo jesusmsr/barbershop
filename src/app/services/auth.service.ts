@@ -38,11 +38,13 @@ export class AuthService {
     if (localStorage.getItem('accessToken')) {
       const token = localStorage.getItem('accessToken');
       if (token && !this.jwtHelper.isTokenExpired(token)) {
-        console.log('true')
         return true
       }
     }
-    console.log('false')
     return false
+  }
+
+  refreshToken(token: string) {
+    return this.http.post(`${this.baseUrl}/api/token/refresh/`, token);
   }
 }

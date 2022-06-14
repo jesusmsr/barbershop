@@ -15,13 +15,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

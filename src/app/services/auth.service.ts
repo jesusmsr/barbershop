@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user.model';
+import { TokenstorageService } from './tokenstorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,17 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private jwtHelper: JwtHelperService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenstorageService
   ) { }
+
+  getUserSession(token: string) {
+    return this.http.get(`${this.baseUrl}/account/session/`, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+  }
 
   login(email: string, password: string) {
     this.isLogged$.next(true);
@@ -30,7 +40,7 @@ export class AuthService {
 
   logout() {
     this.isLogged$.next(false);
-    localStorage.clear();
+    this.tokenService.signOut();
     this.router.navigate(['login']);
   }
 
@@ -48,7 +58,7 @@ export class AuthService {
 
   isAuth() {
     if (localStorage.getItem('accessToken')) {
-      const token = localStorage.getItem('accessToken');
+      const token = this.tokenService.getToken();
       if (token && !this.jwtHelper.isTokenExpired(token)) {
         this.isLogged$.next(true);
         return true

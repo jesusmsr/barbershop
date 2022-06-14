@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenstorageService } from 'src/app/services/tokenstorage.service';
 
 
 
@@ -18,7 +19,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private tokenService: TokenstorageService
 
   ) { }
 
@@ -33,8 +35,8 @@ export class LoginPageComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response: any) => {
       if (response.response === '200') {
-        localStorage.setItem('accessToken', response.token.access);
-        localStorage.setItem('refreshToken', response.token.refresh);
+        this.tokenService.saveToken(response.token.access);
+        this.tokenService.saveRefreshToken(response.token.refresh);
         this.router.navigate(['']);
       }
     })

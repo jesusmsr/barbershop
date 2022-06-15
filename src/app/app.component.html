@@ -1,14 +1,27 @@
 <mat-drawer-container class="example-container">
     <mat-drawer mode="side"
-        [opened]="isLogged | async">
+        [opened]="true">
         <div class="drawer-container">
-            <button type="submit"
-                mat-raised-button
-                [routerLink]="['/home']">Home</button>
-            <button type="submit"
+            <button *ngIf="isLogged | async"
+                type="button"
                 mat-raised-button
                 (click)="logout()">Logout</button>
-            <button type="submit"
+            <button *ngIf="!(isLogged | async)"
+                type="button"
+                mat-raised-button
+                [routerLink]="['/login']">Login</button>
+            <button *ngIf="!(isLogged | async)"
+                type="button"
+                mat-raised-button
+                [routerLink]="['/register']">Register</button>
+            <button type="button"
+                mat-raised-button
+                [routerLink]="['/home']">Home</button>
+            <button type="button"
+                mat-raised-button
+                [routerLink]="['/bookings']">Bookings</button>
+
+            <button type="button"
                 mat-raised-button
                 [routerLink]="['/profile']">Profile</button>
         </div>

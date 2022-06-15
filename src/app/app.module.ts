@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,6 +18,11 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatCardModule } from '@angular/material/card';
+import { BookingPageComponent } from './pages/booking-page/booking-page.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateTimePickerComponent } from './components/date-time-picker/date-time-picker.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,9 @@ import { MatCardModule } from '@angular/material/card';
     RegisterPageComponent,
     HomePageComponent,
     ProfileComponent,
-    SidebarComponent
+    SidebarComponent,
+    BookingPageComponent,
+    DateTimePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -38,11 +45,18 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatButtonModule,
     MatSidenavModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

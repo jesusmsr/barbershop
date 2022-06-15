@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register-page',
@@ -16,7 +15,7 @@ export class RegisterPageComponent implements OnInit {
     private authService: AuthService
   ) { }
 
-  loginForm = this.formBuilder.group({
+  registerForm = this.formBuilder.group({
     email: '',
     username: '',
     phoneNumber: '',
@@ -30,17 +29,21 @@ export class RegisterPageComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.loginForm.value.password == this.loginForm.value.confirmPassword) {
+    console.log('?????????????');
+    if (this.registerForm.value.password == this.registerForm.value.confirmPassword) {
       const user = new User()
+      console.log('aha');
 
-      user.username = this.loginForm.value.username
-      user.email = this.loginForm.value.email
-      user.phoneNumber = this.loginForm.value.phoneNumber
-      user.firstName = this.loginForm.value.firstName
-      user.lastName = this.loginForm.value.lastName
-      user.password = this.loginForm.value.password
+      user.username = this.registerForm.value.username
+      user.email = this.registerForm.value.email
+      user.phoneNumber = this.registerForm.value.phoneNumber
+      user.firstName = this.registerForm.value.firstName
+      user.lastName = this.registerForm.value.lastName
+      user.password = this.registerForm.value.password
 
-      this.authService.register(user, this.loginForm.value.confirmPassword);
+      this.authService.register(user, this.registerForm.value.confirmPassword).subscribe(response => {
+        console.log(response);
+      });
     }
   }
 

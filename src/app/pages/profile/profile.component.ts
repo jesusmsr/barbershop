@@ -19,10 +19,16 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getUserSession(this.tokenService.getToken()!).subscribe((value: any) => {
-      this.user.username = value.username;
-      this.user.email = value.email;
-      console.log(value);
+      this.prepareUserObj(value);
     })
+  }
+
+  prepareUserObj(user: any) {
+    this.user.username = user.username;
+    this.user.email = user.email;
+    this.user.firstName = user.first_name;
+    this.user.lastName = user.last_name
+    this.user.phoneNumber = user.phone_number;
   }
 
 }
